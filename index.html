@@ -1,95 +1,32 @@
-<!DOCTYPE HTML>
-<html>
+
+<!DOCTYPE html>
+<!-- 
+Nome: Alicia Taiwo da Silva Montesano                          nº: 02        Turma: 3ºA              
+Nome: Diego Souza Horvate                                      nº: 06        Turma: 3ºA             
+Nome: Tales Costa Caetano Silva                                nº: 32        Turma: 3ºA 
+Nome: Kauâ Andreotti Gabriel                                   nº: 20        Turma: 3ºA   -->
+
+<html lang="pt-BR">
 <head>
-    <title>Exercício Colisão</title>
-    <script src="gamesWeb.js"></script>
+<title>Imagem</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto|Sirin+Stencil" rel="stylesheet">
+<meta charset="UTF-8">
+<link rel="icon" href="Imagens/Icon1/favicon.ico" type="image/x-icon"?v=2 />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+canvas {
+border:1px solid #d3d3d3;
+background-color: #f1f1f1;
+}
+</style>
+<script src="nave.js"></script>
+
+
 </head>
-<body>
-    <canvas id="canv" width="1000" height="600">
-        Este browser não suporta o objeto canvas do HTML5.
-    </canvas>
-        <script>
-   // Seleciona o canvas e o contexto 2D
-const canvas = document.getElementById("canv");
-const ctx = canvas.getContext("2d");
+<body onload="startGame();">
+    <img id="image" src="./img/naveheroi.png" style="display:none;">
 
-// Carrega a imagem da nave
-const nave = new Image();
-nave.src = "img/nave.png";
-nave.onload = function() {
-    xNave = canvas.width / 2 - nave.width / 2;
-    yNave = canvas.height - nave.height;
-    ctx.drawImage(nave, xNave, yNave);
-}
-
-// Carrega a imagem do inimigo
-const inimigo = new Image();
-inimigo.src = "img/inimigo.png";
-inimigo.onload = function() {
-    xInimigo = canvas.width / 2 - nave.width / 2;
-    yInimigo = 0;
-    ctx.drawImage(inimigo, xInimigo, yInimigo);
-}
-
-// Função para verificar colisão
-function colidiu() {
-    var largura = nave.width;
-    var altura = nave.height;
-    return (xNave + largura) > xInimigo &&
-           xNave < (xInimigo + largura) &&
-           (yNave + altura) > yInimigo &&
-           yNave < (yInimigo + altura);
-}
-
-// Função para movimentar a nave e o inimigo
-function movimentaNaveInimigo(tecla) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Movimentação da nave
-    if (tecla == "ArrowLeft") {
-        xNave -= 50;
-        xNave = Math.max(0, xNave);
-    } else if (tecla == "ArrowRight") {
-        xNave += 50;
-        xNave = Math.min(canvas.width - nave.width, xNave);
-    } else if (tecla == "ArrowUp") {
-        yNave -= 50;
-        yNave = Math.max(0, yNave);
-    } else if (tecla == "ArrowDown") {
-        yNave += 50;
-        yNave = Math.min(canvas.height - nave.height, yNave);
-    }
-
-    // Movimentação do inimigo
-    if (tecla == "a") {
-        xInimigo -= 50;
-        xInimigo = Math.max(0, xInimigo);
-    } else if (tecla == "d") {
-        xInimigo += 50;
-        xInimigo = Math.min(canvas.width - inimigo.width, xInimigo);
-    } else if (tecla == "w") {
-        yInimigo -= 50;
-        yInimigo = Math.max(0, yInimigo);
-    } else if (tecla == "s") {
-        yInimigo += 50;
-        yInimigo = Math.min(canvas.height - inimigo.height, yInimigo);
-    }
-
-    // Redesenha as imagens
-    ctx.drawImage(nave, xNave, yNave);
-    ctx.drawImage(inimigo, xInimigo, yInimigo);
-
-    // Verifica colisão
-    if (colidiu()) {
-        alert("Chocou uma com a outra!");
-    }
-}
-
-// Adiciona evento de teclado
-document.addEventListener("keydown", function(evento) {
-    movimentaNaveInimigo(evento.key);
-});
-
-</script>
 </body>
 </html>
